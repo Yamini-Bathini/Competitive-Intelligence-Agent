@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/banner.png" alt="Foresight — Competitive Intelligence Agent — See Beyond. Stay Ahead." width="100%"/>
+<img src="docs/banner.jpg.png" alt="Foresight — Competitive Intelligence Agent — See Beyond. Stay Ahead." width="100%"/>
 
 <br/><br/>
 
