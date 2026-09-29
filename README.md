@@ -1,169 +1,179 @@
 <div align="center">
 
-# 🔭 Foresight
+<img src="docs/banner.png" alt="Foresight — Competitive Intelligence Agent — See Beyond. Stay Ahead." width="100%"/>
 
-### Competitor intelligence that remembers
+<br/><br/>
 
-*An agent that watches competitors, retains every signal in [Hindsight](https://github.com/vectorize-io/hindsight) memory, spots repeated behavior, predicts the next move — then scores itself against what actually happens.*
-
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-foresight--one--livid.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://foresight-one-livid.vercel.app/)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Hindsight](https://img.shields.io/badge/Memory-Hindsight-F0B429?style=for-the-badge)](https://hindsight.vectorize.io/)
 [![Groq](https://img.shields.io/badge/LLM-Groq-FF6B35?style=for-the-badge)](https://groq.com/)
+[![SQLite](https://img.shields.io/badge/Storage-SQLite-4479A1?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-4CC29A?style=for-the-badge)](LICENSE)
+
+**[🔴 Live Demo](https://foresight-one-livid.vercel.app/)** · **[Run locally](#-run-it-locally)** · **[Demo in 60s](#-try-it-in-60-seconds)** · **[Architecture](#-architecture)** · **[API](#-api-surface)** · **[Hindsight usage](#-how-hindsight-is-used)**
 
 </div>
 
----
+<br/>
 
-## Why this exists
+> [!NOTE]
+> Competitive intelligence is only valuable when it's *cumulative*. A one‑shot query to an LLM can tell you a competitor has a pricing page. It can't tell you the pattern behind six months of moves — because it doesn't remember them. Foresight does, because [Hindsight](https://github.com/vectorize-io/hindsight) does.
 
-Competitive intelligence is only useful when it's cumulative. A one-shot query to an LLM can tell you a competitor has a pricing page. It can't tell you:
+<br/>
 
-> *"NimbusCRM has cut Pro pricing twice in five months, always 6 weeks after a sales-hiring spree — and it's doing it again right now."*
-
-That sentence only exists because something **remembered**. Foresight is built around [Hindsight](https://hindsight.vectorize.io/) as its memory layer — every signal it sees becomes a dated, retained fact, and every answer it gives is grounded in what it recalled, not what it guessed.
+## 🧠 The before / after that this whole project is built around
 
 <table>
 <tr>
-<th align="center">🧠 Without memory</th>
-<th align="center">🔭 With Hindsight</th>
+<th width="50%" align="center">Without memory</th>
+<th width="50%" align="center">🔭 With Hindsight</th>
 </tr>
-<tr>
-<td valign="top">
+<tr valign="top">
+<td>
 
-"NimbusCRM has a pricing page. You'd need to check it manually and compare with old notes, if you kept any."
+> "NimbusCRM has a pricing page. I don't have history on it — you'd need to check manually and compare with old notes, if you kept any."
+
+*Generic. No dates. Starts from zero every single time.*
 
 </td>
-<td valign="top">
+<td>
 
-"NimbusCRM cut Pro from $49→$42 (Feb) then $42→$35 (May) — both ~6 weeks after a sales-hiring push. **Predicted** the May cut in April. **Scored: HIT.**"
+> "NimbusCRM cut Pro from **$49→$42** (Feb) then **$42→$35** (May) — both **~6 weeks after a sales‑hiring push**. I predicted the May cut back in April. **Scored: HIT.**"
+
+*Dated, evidenced, and it graded its own foresight.*
 
 </td>
 </tr>
 </table>
 
----
+<br/>
 
-## What it actually does
+## ✨ What it does
 
-| Capability | How |
-|---|---|
-| 🗓️ **Retains dated signals** | Every pricing change, launch, hiring push, messaging shift and blog post is stored in Hindsight as a self-contained, timestamped fact |
-| 🔍 **Answers with evidence** | `recall` pulls the exact memories behind every answer — shown side-by-side against what a memoryless agent would say |
-| 🧩 **Finds repeated behavior** | Detects patterns like *"hires sales → cuts price ~6 weeks later"* or *"copies competitor launches within 40 days"* |
-| 🔮 **Predicts, then grades itself** | Opens a hypothesis when a pattern fires, then retains the outcome as **HIT** or **MISS** once reality catches up |
-| 🎯 **Learns your preferences** | Say *"ignore blog posts"* once — it's retained to memory and every brief after that respects it |
-| 🌐 **Watches real pages & feeds** | Diffs live URLs and RSS/Atom feeds on a schedule, filters out cookie-banner noise, turns real change into memory |
-| 🔔 **Alerts you** | Flags high-importance signals and prediction outcomes to a Slack/Discord webhook, plus a scheduled digest brief |
+<table>
+<tr><td>🗓️</td><td><b>Retains dated signals</b></td><td>Every pricing change, launch, hiring push, messaging shift and blog post becomes a self‑contained, timestamped fact in Hindsight</td></tr>
+<tr><td>🔎</td><td><b>Answers with evidence</b></td><td><code>recall</code> surfaces the exact memories behind every answer — shown next to what a memory‑less agent would say</td></tr>
+<tr><td>🧩</td><td><b>Finds repeated behavior</b></td><td>Detects patterns like <i>"hires sales → cuts price ~6 weeks later"</i> or <i>"copies competitor launches within 40 days"</i></td></tr>
+<tr><td>🔮</td><td><b>Predicts, then grades itself</b></td><td>Opens a hypothesis when a pattern fires, then retains the outcome as <b>HIT</b> or <b>MISS</b> once reality catches up</td></tr>
+<tr><td>🎯</td><td><b>Learns your preferences</b></td><td>Say <i>"ignore blog posts"</i> once — it's retained to memory, and every brief afterward respects it</td></tr>
+<tr><td>🌐</td><td><b>Watches real pages & feeds</b></td><td>Diffs live URLs and RSS/Atom feeds on a schedule, filters cookie‑banner noise, turns real change into memory</td></tr>
+<tr><td>🔔</td><td><b>Alerts you</b></td><td>Flagged signals and prediction outcomes post to Slack/Discord, plus a scheduled digest brief</td></tr>
+</table>
 
----
+<br/>
 
-## Architecture
+## 🏗 Architecture
 
-```
-                    ┌─────────────────────────┐
-   Signals in  ───▶ │      core.ingest()      │
-  (form, page       │  1 filter muted prefs    │
-   diff, feed)       │  2 atomize into facts    │
-                    │  3 retain() ──────────┐ │
-                    │  4 check hypotheses    │ │
-                    │  5 flag importance     │ │
-                    │  6 write insight        │ │
-                    └────────────────────────┼─┘
-                                              ▼
-                                     ┌─────────────────┐
-                                     │  HINDSIGHT BANK  │
-                                     │  retain / recall │
-                                     │     / reflect    │
-                                     └────────┬─────────┘
-                                              │
-                     ┌────────────┬───────────┼────────────┐
-                     ▼            ▼           ▼            ▼
-                   Ask         Timeline     Brief      Predictions
-              (recall + LLM)  (patterns)  (reflect)    (hit-rate)
-```
+<div align="center">
+<img src="docs/architecture.svg" alt="Signal → ingest pipeline → Hindsight bank → Ask / Brief / Timeline / Alerts" width="100%"/>
+</div>
 
----
+<br/>
 
-## Quickstart
+## 🌐 Live demo
+
+> **[foresight-one-livid.vercel.app](https://foresight-one-livid.vercel.app/)** — no install needed. Click **Ingest next month** a few times, then check **Predictions**.
+
+<br/>
+
+## 🚀 Run it locally
 
 ```bash
 git clone <your-repo-url> foresight && cd foresight
 pip install -r requirements.txt
 
 cp .env.example .env
-# fill in HINDSIGHT_URL + HINDSIGHT_API_KEY (Hindsight Cloud → promo MEMHACK99 for free credits)
-# optional: XAI_API_KEY for Grok (defaults to XAI_MODEL=grok-4.7)
-# optional fallback: GROQ_API_KEY for Groq; XAI_API_KEY takes precedence
-# optional: ALERT_WEBHOOK for Slack/Discord alerts
+# HINDSIGHT_URL + HINDSIGHT_API_KEY   → hindsight.vectorize.io Cloud, promo MEMHACK99 for free credits
+# GROQ_API_KEY (optional)             → LLM-written answers and briefs
+# ALERT_WEBHOOK (optional)            → Slack/Discord webhook for alerts
 
 uvicorn app.main:app --reload
 ```
 
-Open **http://localhost:8000** — check the header pill:
-
-For Vercel, add `XAI_API_KEY` as a sensitive Production Environment Variable and redeploy. Never commit `.env` or API keys.
+Open **http://localhost:8000** and check the header pill:
 
 | Pill | Meaning |
-|---|---|
-| 🟢 `memory: hindsight` | Connected to real Hindsight memory |
-| 🟡 `memory: local (fallback)` | Offline mode — a red banner explains why, and shows the exact error |
+|:--|:--|
+| 🟢 `memory: hindsight` | Connected — everything below is real |
+| 🟡 `memory: local (fallback)` | Offline — a red banner shows the exact connection error |
 
-Then run `curl http://localhost:8000/api/health` for a scriptable connection check.
+```bash
+curl http://localhost:8000/api/health   # {"hindsight_connected": true, "error": null}
+```
 
----
+<details>
+<summary><b>Troubleshooting the connection</b></summary>
+<br/>
 
-## Try it in 60 seconds
+- **Pill stays yellow** → `HINDSIGHT_API_KEY` is empty or invalid; check `/api/health` for the raw error.
+- **Windows users** → the app loads `.env` automatically via `python-dotenv`; no `set`/`export` needed.
+- **Data disappears on restart** → set `DB=foresight.db` in `.env` (already the default) so SQLite persists to disk.
 
-1. Click **Ingest next month** a few times, watching the memory-activity panel fill with `retain` calls.
-2. Open **Ask** → *"What has NimbusCRM done on pricing?"* — see the without/with-memory contrast.
-3. Open **Predictions** → find a hypothesis opened in April, scored `HIT` in May.
-4. Type **"ignore blog posts"** → open **Brief** → blog signals are gone, and the preference is retained to memory, not just stored locally.
+</details>
 
----
+<br/>
 
-## API surface
+## ⏱ Try it in 60 seconds
+
+```
+1. Click "Ingest next month" a few times     → watch retain calls fill the memory panel
+2. Ask: "What has NimbusCRM done on pricing?" → see the without/with-memory contrast
+3. Open Predictions                          → find an April hypothesis, scored HIT in May
+4. Type: "ignore blog posts" → open Brief    → blog signals gone, preference retained to memory
+```
+
+<br/>
+
+## 🔌 API surface
 
 | Endpoint | Purpose |
-|---|---|
+|:--|:--|
 | `POST /api/signal` | Add a competitor signal by hand |
 | `POST /api/collect` | Diff a live URL or RSS/Atom feed and retain what changed |
-| `POST /api/ask` | Ask a question — recalls evidence, shows patterns |
-| `GET /api/brief` | `reflect`-generated brief, respecting learned preferences |
-| `GET /api/predictions` | Prediction ledger with hit/miss/pending and hit-rate |
-| `GET /api/timeline` | Full signal history per competitor, patterns highlighted |
-| `GET /api/health` | `{hindsight_connected, error}` — for scripts and CI |
+| `POST /api/ask` | Ask a question — recalls evidence, surfaces patterns |
+| `GET  /api/brief` | `reflect`‑generated brief, respecting learned preferences |
+| `GET  /api/predictions` | Prediction ledger — hit / miss / pending + hit‑rate |
+| `GET  /api/timeline` | Full signal history per competitor, patterns highlighted |
+| `GET  /api/health` | `{hindsight_connected, error}` — for scripts & CI |
 | `POST /api/brief/send` | Force a brief to the alert webhook immediately |
 
----
+<br/>
 
-## How Hindsight is used
+## 🧬 How Hindsight is used
 
 | Operation | Where | Why |
-|---|---|---|
-| **`retain`** | Every ingested signal, every prediction, every scored outcome, every learned preference | Each is a dated, self-contained fact with `context` + `timestamp` |
-| **`recall`** | `Ask` | Grounds every answer in actual stored evidence, not a guess |
+|:--|:--|:--|
+| **`retain`** | Every ingested signal · every prediction · every scored outcome · every learned preference | Each is a dated, self‑contained fact with `context` + `timestamp` |
+| **`recall`** | `Ask` | Grounds every answer in stored evidence, never a guess |
 | **`reflect`** | `Brief` | Synthesizes patterns and recommendations across everything retained |
 
-Every Hindsight call is wrapped — a failure logs the real error and falls back to local memory rather than crashing.
+Every call is wrapped — a failure logs the real error and falls back to local memory instead of crashing the app.
 
----
+<br/>
 
-## Stack
+## 🧱 Stack
 
-`Python` · `FastAPI` · `SQLite` (events, predictions, preferences, snapshots) · [`hindsight-client`](https://github.com/vectorize-io/hindsight) · `Grok` via xAI (Groq fallback) · `httpx` + `BeautifulSoup` (page/feed collection)
+<div>
 
----
+`Python` · `FastAPI` · `SQLite` <sub>(events · predictions · preferences · snapshots)</sub> · [`hindsight-client`](https://github.com/vectorize-io/hindsight) · `Groq` <sub>(LLM)</sub> · `httpx` + `BeautifulSoup` <sub>(page & feed collection)</sub>
 
-## Not yet implemented
+</div>
 
-Auth · multi-workspace banks · JavaScript-rendered pages (headless browser) · mental-model battlecards per competitor
+<br/>
+
+## 🚧 Not yet implemented
+
+Auth · multi‑workspace banks · JavaScript‑rendered pages (headless browser) · mental‑model battlecards per competitor
+
+<br/>
 
 ---
 
 <div align="center">
 
-Built on **[Hindsight](https://github.com/vectorize-io/hindsight)** — agent memory that learns · [docs](https://hindsight.vectorize.io/) · [what is agent memory](https://vectorize.io/what-is-agent-memory)
+Built on **[Hindsight](https://github.com/vectorize-io/hindsight)** — agent memory that learns
+&nbsp;·&nbsp; [docs](https://hindsight.vectorize.io/) &nbsp;·&nbsp; [what is agent memory](https://vectorize.io/what-is-agent-memory)
 
 </div>
