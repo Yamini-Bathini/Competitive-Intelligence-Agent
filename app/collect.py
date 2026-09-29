@@ -4,6 +4,16 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 load_dotenv()
 def llm(prompt,system="You are a competitive intelligence analyst. Cite dates. Be concise."):
+    xai_key=os.getenv("XAI_API_KEY")
+    if xai_key:
+        try:
+            r=httpx.post("https://api.x.ai/v1/responses",headers={"Authorization":"Bearer "+xai_key},
+            json={"model":os.getenv("XAI_MODEL","grok-4.7"),"instructions":system,"input":prompt},timeout=40)
+            r.raise_for_status();data=r.json()
+            if isinstance(data.get("output_text"),str):return data["output_text"]
+            return "\n".join(part["text"] for item in data.get("output",[]) if item.get("type")=="message"
+            for part in item.get("content",[]) if part.get("type")=="output_text" and isinstance(part.get("text"),str)) or None
+        except Exception:return None
     k=os.getenv("GROQ_API_KEY")
     if not k:return None
     try:

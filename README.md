@@ -94,13 +94,16 @@ pip install -r requirements.txt
 
 cp .env.example .env
 # fill in HINDSIGHT_URL + HINDSIGHT_API_KEY (Hindsight Cloud → promo MEMHACK99 for free credits)
-# optional: GROQ_API_KEY for LLM-written answers and briefs
+# optional: XAI_API_KEY for Grok (defaults to XAI_MODEL=grok-4.7)
+# optional fallback: GROQ_API_KEY for Groq; XAI_API_KEY takes precedence
 # optional: ALERT_WEBHOOK for Slack/Discord alerts
 
 uvicorn app.main:app --reload
 ```
 
 Open **http://localhost:8000** — check the header pill:
+
+For Vercel, add `XAI_API_KEY` as a sensitive Production Environment Variable and redeploy. Never commit `.env` or API keys.
 
 | Pill | Meaning |
 |---|---|
@@ -149,7 +152,7 @@ Every Hindsight call is wrapped — a failure logs the real error and falls back
 
 ## Stack
 
-`Python` · `FastAPI` · `SQLite` (events, predictions, preferences, snapshots) · [`hindsight-client`](https://github.com/vectorize-io/hindsight) · `Groq` (LLM) · `httpx` + `BeautifulSoup` (page/feed collection)
+`Python` · `FastAPI` · `SQLite` (events, predictions, preferences, snapshots) · [`hindsight-client`](https://github.com/vectorize-io/hindsight) · `Grok` via xAI (Groq fallback) · `httpx` + `BeautifulSoup` (page/feed collection)
 
 ---
 
