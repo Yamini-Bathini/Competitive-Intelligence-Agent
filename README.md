@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/banner.jpg.png" alt="Foresight — Competitive Intelligence Agent — See Beyond. Stay Ahead." width="100%"/>
+<img src="Docs/banner.jpg.png" alt="Foresight — Competitive Intelligence Agent — See Beyond. Stay Ahead." width="100%"/>
 
 <br/><br/>
 
@@ -67,7 +67,7 @@
 ## 🏗 Architecture
 
 <div align="center">
-<img src="docs/architecture.svg" alt="Signal → ingest pipeline → Hindsight bank → Ask / Brief / Timeline / Alerts" width="100%"/>
+<img src="Docs/architecture.svg" alt="Signal → ingest pipeline → Hindsight bank → Ask / Brief / Timeline / Alerts" width="100%"/>
 </div>
 
 <br/>
